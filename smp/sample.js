@@ -2,7 +2,7 @@
 const JsonAsty = require("..")
 
 /*  the JSON input  */
-let json = `{
+const json = `{
     "foo": {
         "bar": true,
         "baz": 42.0,
@@ -12,11 +12,11 @@ let json = `{
 console.log(`JSON (old):\n${json}`)
 
 /*  parse JSON into AST  */
-let ast = JsonAsty.parse(json)
+const ast = JsonAsty.parse(json)
 console.log(`AST Dump (all):\n${JsonAsty.dump(ast, { colors: true })}`)
 
 /*  the AST query  */
-let query = `
+const query = `
     .// member [
         ..// member [
             / string [ pos() == 1 && @value == "foo" ]
@@ -29,16 +29,16 @@ let query = `
 console.log(`AST Query:\n${query}`)
 
 /*  query AST node  */
-let nodes = ast.query(query)
-let node = nodes[0]
+const nodes = ast.query(query)
+const node = nodes[0]
 console.log(`AST Dump (sub, old):\n${node.dump()}`)
 
 /*  manipulate AST node  */
-let nodeNew = node.create("string").set({ value: "TEST" })
+const nodeNew = node.create("string").set({ value: "TEST" })
 node.parent().del(node).add(nodeNew)
 console.log(`AST Dump (sub, new):\n${node.dump()}`)
 
 /*  unparse AST into JSON  */
-let jsonNew = JsonAsty.unparse(ast)
+const jsonNew = JsonAsty.unparse(ast)
 console.log(`JSON (new):\n${jsonNew}`)
 

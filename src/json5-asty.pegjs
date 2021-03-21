@@ -142,16 +142,16 @@ valueNumber "number literal value"
                 return parseInt(text(), 16)
             }
             / (
-                digits:(
-                  ((decimalDigit* ".")? decimalDigit+)
-                  / (decimalDigit+ ("." decimalDigit*)?)
-                )
+                digits:((decimalDigit* ".")? decimalDigit+)
+                exp:([eE] ("-" / "+")? decimalDigit+)?
             ) {
                 return parseFloat(text())
             }
             / (
-                digits:((decimalDigit* ".")? decimalDigit+)
-                exp:([eE] ("-" / "+")? decimalDigit+)?
+                digits:(
+                  ((decimalDigit* ".")? decimalDigit+)
+                  / (decimalDigit+ ("." decimalDigit*)?)
+                )
             ) {
                 return parseFloat(text())
             }

@@ -34,35 +34,35 @@ module.exports = function (grunt) {
             options: {
                 configFile: "eslint.yaml"
             },
-            "json-asty": [ "src/**/*.js", "tst/**/*.js" ]
+            "json-asty": ["src/**/*.js", "tst/**/*.js"]
         },
         browserify: {
             "json-asty-browser": {
                 files: {
-                    "lib/json-asty.browser.js": [ "src/json-asty.js" ]
+                    "lib/json-asty.browser.js": ["src/json-asty.js"]
                 },
                 options: {
                     transform: [
-                        [ "envify", { PLATFORM: "browser" } ],
-                        [ "babelify", {
+                        ["envify", { PLATFORM: "browser" }],
+                        ["babelify", {
                             presets: [
-                                [ "@babel/preset-env", {
-                                    "targets": {
-                                        "browsers": "last 2 versions, > 1%, ie 11"
+                                ["@babel/preset-env", {
+                                    targets: {
+                                        browsers: "last 2 versions, > 1%, ie 11"
                                     }
-                                } ]
+                                }]
                             ],
-                            plugins: [ [ "@babel/plugin-transform-runtime", {
-                                "helpers":     false,
-                                "regenerator": false
-                            } ] ]
-                        } ],
-                        [ "uglifyify", { sourceMap: false, global: true } ],
+                            plugins: [["@babel/plugin-transform-runtime", {
+                                helpers:     false,
+                                regenerator: false
+                            }]]
+                        }],
+                        ["uglifyify", { sourceMap: false, global: true }],
                         "pegjs-otf/transform"
                     ],
                     plugin: [
-                        [ "browserify-derequire" ],
-                        [ "browserify-header" ]
+                        ["browserify-derequire"],
+                        ["browserify-header"]
                     ],
                     browserifyOptions: {
                         standalone: "JsonAsty",
@@ -72,30 +72,30 @@ module.exports = function (grunt) {
             },
             "json-asty-node": {
                 files: {
-                    "lib/json-asty.node.js": [ "src/json-asty.js" ]
+                    "lib/json-asty.node.js": ["src/json-asty.js"]
                 },
                 options: {
                     transform: [
-                        [ "envify", { PLATFORM: "node" } ],
-                        [ "babelify", {
+                        ["envify", { PLATFORM: "node" }],
+                        ["babelify", {
                             presets: [
-                                [ "@babel/preset-env", {
-                                    "targets": {
-                                        "node": "8.0.0"
+                                ["@babel/preset-env", {
+                                    targets: {
+                                        node: "8.0.0"
                                     }
-                                } ]
+                                }]
                             ],
-                            plugins: [ [ "@babel/plugin-transform-runtime", {
-                                "helpers":     false,
-                                "regenerator": false
-                            } ] ]
-                        } ],
-                        [ "uglifyify", { sourceMap: false, global: true } ],
+                            plugins: [["@babel/plugin-transform-runtime", {
+                                helpers:     false,
+                                regenerator: false
+                            }]]
+                        }],
+                        ["uglifyify", { sourceMap: false, global: true }],
                         "pegjs-otf/transform"
                     ],
                     plugin: [
-                        [ "browserify-derequire" ],
-                        [ "browserify-header" ]
+                        ["browserify-derequire"],
+                        ["browserify-header"]
                     ],
                     external: [
                         "asty-astq",
@@ -111,26 +111,26 @@ module.exports = function (grunt) {
         },
         mochaTest: {
             "json-asty": {
-                src: [ "tst/*.js" ]
+                src: ["tst/*.js"]
             },
             options: {
                 reporter: "spec"
             }
         },
         clean: {
-            clean: [ "lib" ],
-            distclean: [ "node_modules" ]
+            clean: ["lib"],
+            distclean: ["node_modules"]
         },
         watch: {
-            "src": {
-                files: [ "src/**/*.js" ],
-                tasks: [ "default" ],
+            src: {
+                files: ["src/**/*.js"],
+                tasks: ["default"],
                 options: {}
             }
         }
     })
-    grunt.registerTask("default", [ "eslint", "browserify", "test" ])
-    grunt.registerTask("dev", [ "default", "watch" ])
-    grunt.registerTask("test", [ "mochaTest" ])
+    grunt.registerTask("default", ["eslint", "browserify", "test"])
+    grunt.registerTask("dev", ["default", "watch"])
+    grunt.registerTask("test", ["mochaTest"])
 }
 

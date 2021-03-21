@@ -23,116 +23,119 @@
 */
 
 /*  external requirements  */
-const ASTY = require("asty-astq");
-const PEG = require("pegjs-otf");
-const PEGUtil = require("pegjs-util");
-const chalk = require("chalk");
+const ASTY = require("asty-astq")
+const PEG = require("pegjs-otf")
+const PEGUtil = require("pegjs-util")
+const chalk = require("chalk")
 
 /*  pre-parse PEG grammar (replaced by browserify)  */
 const jsonParser = PEG.generateFromFile(`${__dirname}/json-asty.pegjs`, {
-  optimize: "size",
-  trace: false,
-});
+    optimize: "size",
+    trace: false
+})
 
 const json5Parser = PEG.generateFromFile(`${__dirname}/json5-asty.pegjs`, {
-  optimize: "size",
-  trace: false,
-});
+    optimize: "size",
+    trace: false
+})
 
 /*  the API class  */
 class JsonAsty {
-  /*  parse JSON into AST  */
-  static parse(json, json5=true) {
-    /*  sanity check argument  */
-    if (typeof json !== "string")
-      throw new Error("invalid JSON argument (expected type string)");
+    /*  parse JSON into AST  */
+    static parse (json, json5 = true) {
+        /*  sanity check argument  */
+        if (typeof json !== "string")
+            throw new Error("invalid JSON argument (expected type string)")
 
-    let parser;
-    if (json5) {
-      parser = json5Parser;
-    } else {
-      parser = jsonParser;
+        let parser
+        if (json5) {
+            parser = json5Parser
+        }
+        else {
+            parser = jsonParser
+        }
+
+        /*  parse specification into Abstract Syntax Tree (AST)  */
+        const asty = new ASTY()
+        const result = PEGUtil.parse(parser, json, {
+            startRule: "json",
+            makeAST: (line, column, offset, args) => {
+                return asty.create.apply(asty, args).pos(line, column, offset)
+            }
+        })
+        if (result.error !== null)
+            throw new Error(
+                "parse: JSON parsing failure:\n" +
+          PEGUtil.errorMessage(result.error, true).replace(/^/gm, "ERROR: ") +
+          "\n"
+            )
+        return result.ast
     }
 
-    /*  parse specification into Abstract Syntax Tree (AST)  */
-    const asty = new ASTY();
-    const result = PEGUtil.parse(parser, json, {
-      startRule: "json",
-      makeAST: (line, column, offset, args) => {
-        return asty.create.apply(asty, args).pos(line, column, offset);
-      },
-    });
-    if (result.error !== null)
-      throw new Error(
-        "parse: JSON parsing failure:\n" +
-          PEGUtil.errorMessage(result.error, true).replace(/^/gm, "ERROR: ") +
-          "\n",
-      );
-    return result.ast;
-  }
-
-  /*  dump AST (with optional colorization)  */
-  static dump(ast, options = {}) {
+    /*  dump AST (with optional colorization)  */
+    static dump (ast, options = {}) {
     /*  determine options  */
-    options = Object.assign(
-      {},
-      {
-        colors: false,
-      },
-      options,
-    );
+        options = Object.assign(
+            {},
+            {
+                colors: false
+            },
+            options
+        )
 
-    /* eslint no-console: off */
-    let output;
-    if (options.colors) {
-      output = ast.dump(Infinity, (type, text) => {
-        switch (type) {
-          case "tree":
-            text = chalk.grey(text);
-            break;
-          case "type":
-            text = chalk.blue(text);
-            break;
-          case "value":
-            text = chalk.yellow(text);
-            break;
-          case "position":
-            text = chalk.grey(text);
-            break;
-          default:
+        /* eslint no-console: off */
+        let output
+        if (options.colors) {
+            output = ast.dump(Infinity, (type, text) => {
+                switch (type) {
+                    case "tree":
+                        text = chalk.grey(text)
+                        break
+                    case "type":
+                        text = chalk.blue(text)
+                        break
+                    case "value":
+                        text = chalk.yellow(text)
+                        break
+                    case "position":
+                        text = chalk.grey(text)
+                        break
+                    default:
+                }
+                return text
+            })
         }
-        return text;
-      });
-    } else output = ast.dump(Infinity);
-    return output;
-  }
+        else output = ast.dump(Infinity)
+        return output
+    }
 
-  /*  unparse AST into JSON  */
-  static unparse(ast) {
+    /*  unparse AST into JSON  */
+    static unparse (ast) {
     /*  sanity check arguments  */
-    if (typeof ast !== "object")
-      throw new Error("generate: invalid AST argument (expected type object)");
+        if (typeof ast !== "object")
+            throw new Error("generate: invalid AST argument (expected type object)")
 
-    /*  walk the AST  */
-    let json = "";
-    ast.walk((node, depth, parent, when) => {
-      if (when === "downward") {
-        const prolog = node.get("prolog");
-        if (prolog !== undefined) json += prolog;
-        const body = node.get("body");
-        if (body !== undefined) json += body;
-        else {
-          const value = node.get("value");
-          if (value !== undefined) json += JSON.stringify(value);
-        }
-      } else if (when === "upward") {
-        const epilog = node.get("epilog");
-        if (epilog !== undefined) json += epilog;
-      }
-    }, "both");
-    return json;
-  }
+        /*  walk the AST  */
+        let json = ""
+        ast.walk((node, depth, parent, when) => {
+            if (when === "downward") {
+                const prolog = node.get("prolog")
+                if (prolog !== undefined) json += prolog
+                const body = node.get("body")
+                if (body !== undefined) json += body
+                else {
+                    const value = node.get("value")
+                    if (value !== undefined) json += JSON.stringify(value)
+                }
+            }
+            else if (when === "upward") {
+                const epilog = node.get("epilog")
+                if (epilog !== undefined) json += epilog
+            }
+        }, "both")
+        return json
+    }
 }
 
 /*  export the API class  */
-module.exports = JsonAsty;
+module.exports = JsonAsty

@@ -1,18 +1,23 @@
 {
-    "name":        "json-asty",
-    "version":     "1.0.5",
-    "description": "Lossless JSON-to-AST Parser and AST-to-JSON Generator",
-    "keywords":    [ "json", "ast", "parse", "generate" ],
-    "browser":     "./lib/json-asty.browser.js",
-    "main":        "./lib/json-asty.node.js",
+    "name": "json5-asty",
+    "version": "1.0.5",
+    "description": "Lossless JSON5-to-AST Parser and AST-to-JSON5 Generator",
+    "keywords": [
+        "json",
+        "ast",
+        "parse",
+        "generate"
+    ],
+    "browser": "./lib/json-asty.browser.js",
+    "main": "./lib/json-asty.node.js",
     "repository": {
         "type": "git",
-        "url":  "https://github.com/rse/json-asty.git"
+        "url": "https://github.com/rse/json-asty.git"
     },
     "author": {
-        "name":  "Dr. Ralf S. Engelschall",
+        "name": "Dr. Ralf S. Engelschall",
         "email": "rse@engelschall.com",
-        "url":   "http://engelschall.com"
+        "url": "http://engelschall.com"
     },
     "contributors": [
         {
@@ -21,43 +26,43 @@
             "url": "http://gitlab.com/LukeAbby/"
         }
     ],
-    "license":  "MIT",
+    "license": "MIT",
     "homepage": "https://github.com/DavidArchibald/json5-asty",
-    "bugs":     "https://github.com/DavidArchibald/json5-astyissues",
+    "bugs": "https://github.com/DavidArchibald/json5-asty/issues",
     "dependencies": {
-        "asty-astq":                                 "1.13.4",
-        "pegjs-otf":                                 "1.2.18",
-        "pegjs-util":                                "1.4.21",
-        "chalk":                                     "4.1.0"
+        "asty-astq": "1.13.4",
+        "pegjs-otf": "1.2.18",
+        "pegjs-util": "1.4.21",
+        "chalk": "4.1.0"
     },
     "devDependencies": {
-        "grunt":                                     "1.3.0",
-        "grunt-cli":                                 "1.3.2",
-        "grunt-contrib-clean":                       "2.0.0",
-        "grunt-contrib-watch":                       "1.1.0",
-        "grunt-eslint":                              "23.0.0",
-        "grunt-browserify":                          "6.0.0",
-        "grunt-mocha-test":                          "0.13.3",
-        "browserify":                                "17.0.0",
-        "envify":                                    "4.1.0",
-        "babelify":                                  "10.0.0",
-        "babel-eslint":                              "10.1.0",
-        "uglifyify":                                 "5.0.2",
-        "browserify-header":                         "1.1.0",
-        "browserify-derequire":                      "1.1.1",
-        "eslint":                                    "7.21.0",
-        "eslint-config-standard":                    "16.0.2",
-        "eslint-plugin-promise":                     "4.3.1",
-        "eslint-plugin-import":                      "2.22.1",
-        "eslint-plugin-node":                        "11.1.0",
-        "@babel/core":                               "7.13.10",
-        "@babel/preset-env":                         "7.13.10",
-        "@babel/plugin-transform-runtime":           "7.13.10",
-        "mocha":                                     "8.3.1",
-        "chai":                                      "4.3.3"
+        "grunt": "1.3.0",
+        "grunt-cli": "1.3.2",
+        "grunt-contrib-clean": "2.0.0",
+        "grunt-contrib-watch": "1.1.0",
+        "grunt-eslint": "23.0.0",
+        "grunt-browserify": "6.0.0",
+        "grunt-mocha-test": "0.13.3",
+        "browserify": "17.0.0",
+        "envify": "4.1.0",
+        "babelify": "10.0.0",
+        "babel-eslint": "10.1.0",
+        "uglifyify": "5.0.2",
+        "browserify-header": "1.1.0",
+        "browserify-derequire": "1.1.1",
+        "eslint": "7.21.0",
+        "eslint-config-standard": "16.0.2",
+        "eslint-plugin-promise": "4.3.1",
+        "eslint-plugin-import": "2.22.1",
+        "eslint-plugin-node": "11.1.0",
+        "@babel/core": "7.13.10",
+        "@babel/preset-env": "7.13.10",
+        "@babel/plugin-transform-runtime": "7.13.10",
+        "mocha": "8.3.1",
+        "chai": "4.3.3"
     },
     "scripts": {
-        "prepublishOnly":  "grunt default",
-        "build":           "grunt default"
+        "prepublishOnly": "grunt default",
+        "build": "grunt default"
     }
 }
