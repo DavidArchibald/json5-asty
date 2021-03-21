@@ -1,19 +1,13 @@
 
-JSON-ASTy
+JSON5-ASTy
 =========
 
-Lossless JSON-to-AST Parser and AST-to-JSON Generator
-
-<p/>
-<img src="https://nodei.co/npm/json-asty.png?downloads=true&stars=true" alt=""/>
-
-<p/>
-<img src="https://david-dm.org/rse/json-asty.png" alt=""/>
+Lossless JSON5-to-AST Parser and AST-to-JSON5 Generator forked from JSON-ASTy. The rest of the description is copied verbatim except to replace the name.
 
 About
 -----
 
-JSON-ASTy is a JavaScript library providing a lossless JavaScript Object
+JSON5-ASTy is a JavaScript library providing a lossless JavaScript Object
 Notation (JSON) to Abstract Syntax Tree (AST) parser and a corresponding
 AST to JSON generator. It is intended for cases where one has to read
 JSON into an AST, manipulate the AST and generate JSON from the AST
@@ -26,14 +20,14 @@ Installation
 ------------
 
 ```shell
-$ npm install json-asty
+$ npm install json5-asty
 ```
 
 Usage
 -----
 
 ```js
-const JsonAsty = require("json-asty")
+const JsonAsty = require("json5-asty")
 
 /*  the JSON input  */
 let json = `{
@@ -157,4 +151,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

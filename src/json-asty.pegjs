@@ -124,6 +124,9 @@ valueString "quoted string literal value"
             }
         )*
         '"' {
+            if (text() === "" || text() == null) {
+              return ast("string").set({ body: '""', value: ""})
+            }
             return ast("string").set({ body: text(), value: chars.join("") })
         }
 
@@ -147,4 +150,3 @@ ws "whitespace"
 
 eof "end of file"
     =   !.
-

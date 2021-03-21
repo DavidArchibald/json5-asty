@@ -14,9 +14,16 @@
         "email": "rse@engelschall.com",
         "url":   "http://engelschall.com"
     },
+    "contributors": [
+        {
+            "name": "LukeAbby",
+            "email": "luke@lukeabby.dev",
+            "url": "http://gitlab.com/LukeAbby/"
+        }
+    ],
     "license":  "MIT",
-    "homepage": "https://github.com/rse/json-asty",
-    "bugs":     "https://github.com/rse/json-asty/issues",
+    "homepage": "https://github.com/DavidArchibald/json5-asty",
+    "bugs":     "https://github.com/DavidArchibald/json5-astyissues",
     "dependencies": {
         "asty-astq":                                 "1.13.4",
         "pegjs-otf":                                 "1.2.18",
